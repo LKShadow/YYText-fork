@@ -200,6 +200,10 @@ static dispatch_queue_t YYTextAsyncLayerGetReleaseQueue() {
     } else {
         [_sentinel increase];
         if (task.willDisplay) task.willDisplay(self);
+        /**20231008
+         掘金发现的问题：https://juejin.cn/post/7250288616534261797
+         Xcode15修复UIGraphicsBeginImageContextWithOptions由于加了断言导致的Crash问题
+         */
         if (self.bounds.size.width < 1 || self.bounds.size.height < 1) {
             CGImageRef image = (__bridge_retained CGImageRef)(self.contents);
             self.contents = nil;
